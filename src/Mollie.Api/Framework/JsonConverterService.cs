@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace Mollie.Api.Framework {
-    internal class JsonConverterService {
+    public class JsonConverterService {
         private readonly JsonSerializerSettings _defaultJsonDeserializerSettings;
 
         public JsonConverterService() {

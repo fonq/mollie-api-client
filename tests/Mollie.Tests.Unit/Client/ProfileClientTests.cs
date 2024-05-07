@@ -33,7 +33,6 @@ public class ProfileClientTests : BaseClientTests
         };
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Post, $"{BaseMollieClient.ApiEndPoint}profiles")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond("application/json", defaultProfileJsonResponse);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var profileClient = new ProfileClient("abcde", httpClient);
@@ -55,7 +54,6 @@ public class ProfileClientTests : BaseClientTests
         const string profileId = "profile-id";
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Get,$"{BaseMollieClient.ApiEndPoint}profiles/{profileId}")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond("application/json", defaultProfileJsonResponse);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var profileClient = new ProfileClient("abcde", httpClient);
@@ -74,7 +72,6 @@ public class ProfileClientTests : BaseClientTests
         // Arrange
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Get, $"{BaseMollieClient.ApiEndPoint}profiles/me")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond("application/json", defaultProfileJsonResponse);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var profileClient = new ProfileClient("abcde", httpClient);
@@ -93,7 +90,6 @@ public class ProfileClientTests : BaseClientTests
         // Arrange
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Get, $"{BaseMollieClient.ApiEndPoint}profiles")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond("application/json", defaultGetProfileListJsonResponse);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var profileClient = new ProfileClient("abcde", httpClient);
@@ -150,7 +146,6 @@ public class ProfileClientTests : BaseClientTests
         };
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Patch, $"{BaseMollieClient.ApiEndPoint}profiles/{profileId}")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond("application/json", defaultProfileJsonResponse);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var profileClient = new ProfileClient("abcde", httpClient);
@@ -186,7 +181,6 @@ public class ProfileClientTests : BaseClientTests
         const string paymentMethod = PaymentMethod.Ideal;
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Post,$"{BaseMollieClient.ApiEndPoint}profiles/me/methods/{paymentMethod}")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond("application/json", defaultPaymentMethodResponse);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var profileClient = new ProfileClient("abcde", httpClient);
@@ -223,7 +217,6 @@ public class ProfileClientTests : BaseClientTests
         const string paymentMethod = PaymentMethod.Ideal;
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Delete, $"{BaseMollieClient.ApiEndPoint}profiles/me/methods/{paymentMethod}")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond(HttpStatusCode.NoContent);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var profileClient = new ProfileClient("abcde", httpClient);
@@ -257,7 +250,6 @@ public class ProfileClientTests : BaseClientTests
         const string profileId = "profile-id";
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Delete, $"{BaseMollieClient.ApiEndPoint}profiles/{profileId}")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond(HttpStatusCode.NoContent);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var profileClient = new ProfileClient("abcde", httpClient);
@@ -291,7 +283,6 @@ public class ProfileClientTests : BaseClientTests
         const string issuer = "festivalcadeau";
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Post,$"{BaseMollieClient.ApiEndPoint}profiles/me/methods/giftcard/issuers/{issuer}")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond("application/json", defaultEnableGiftcardIssuerResponse);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var profileClient = new ProfileClient("abcde", httpClient);
@@ -329,7 +320,6 @@ public class ProfileClientTests : BaseClientTests
         const string issuer = "festivalcadeau";
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Delete, $"{BaseMollieClient.ApiEndPoint}profiles/me/methods/giftcard/issuers/{issuer}")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond(HttpStatusCode.NoContent);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var profileClient = new ProfileClient("abcde", httpClient);

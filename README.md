@@ -1,3 +1,13 @@
+# fonQ fork
+
+## Changes
+
+### 2024-05-06
+ * Changed basic sln to match v4.5
+ * Removed the implemented retry policy because of the requirements for TargetFramework 4.6, and we *require* 4.5.
+
+---
+
 # MollieApi
 ![](https://github.com/Viincenttt/MollieApi/workflows/Run%20automated%20tests/badge.svg)
 

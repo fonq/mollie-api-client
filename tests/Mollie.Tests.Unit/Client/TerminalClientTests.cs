@@ -39,7 +39,6 @@ public class TerminalClientTests : BaseClientTests {
         string jsonToReturnInMockResponse = CreateTerminalJsonResponse(terminalId, description, serialNumber, brand, model);
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.When($"{BaseMollieClient.ApiEndPoint}terminals/{terminalId}")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond("application/json", jsonToReturnInMockResponse);
         HttpClient httpClient = mockHttp.ToHttpClient();
         var terminalClient = new TerminalClient("abcde", httpClient);

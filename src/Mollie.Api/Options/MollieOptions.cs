@@ -1,7 +1,4 @@
-﻿using System.Net.Http;
-using Polly;
-
-namespace Mollie.Api.Options {
+﻿namespace Mollie.Api.Options {
     public class MollieOptions {
         /// <summary>
         /// Your API-key or OAuth token
@@ -18,10 +15,5 @@ namespace Mollie.Api.Options {
         /// </summary>
         /// <returns></returns>
         public string ClientSecret { get; set; }
-        
-        /// <summary>
-        /// (Optional) Polly retry policy for failed requests
-        /// </summary>
-        public IAsyncPolicy<HttpResponseMessage> RetryPolicy { get; set; }
     }
 }
