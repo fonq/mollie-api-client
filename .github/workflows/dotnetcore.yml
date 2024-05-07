@@ -13,12 +13,14 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '8.0.x'
+    - name: Clean project
+      run: dotnet clean ./MollieApi.sln --configuration Release && dotnet nuget locals all --clear
     - name: Install dependencies
       run: dotnet restore
     - name: Build project
-      run: dotnet build --configuration Debug --no-restore
+      run: dotnet build --configuration Release --no-restore
     - name: Run unit tests
-      run: dotnet test tests/Mollie.Tests.Unit --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity normal
     # - name: Build integration test project
     #   run: dotnet build tests/Mollie.Tests.Integration --configuration Release --no-restore
     # - name: Run integration tests
