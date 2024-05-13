@@ -21,7 +21,7 @@ jobs:
     - name: Setup NuGet Client
       uses: nuget/setup-nuget@v2
       with:
-        nuget-version: latest
+        nuget-version: 4.5
 
     - name: Install dependencies
       run: dotnet restore
