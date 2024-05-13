@@ -23,6 +23,9 @@ jobs:
       with:
         nuget-version: 4.5
 
+    - name:
+      run: dotnet nuget locals --clear all
+
     # - name: Setup packages
     #   run: |
     #     dotnet add package Newtonsoft.Json --version 13.0.3
