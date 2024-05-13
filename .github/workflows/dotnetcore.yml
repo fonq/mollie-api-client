@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: windows-2018
+    runs-on: windows-2019
     env:
       NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 
