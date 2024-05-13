@@ -21,22 +21,16 @@ jobs:
     - name: Setup NuGet Client
       uses: nuget/setup-nuget@v2
       with:
-        nuget-version: 4.5
+        nuget-version: latest
 
     - name:
       run: dotnet nuget locals --clear all
-
-    # - name: Setup packages
-    #   run: |
-    #     dotnet add package Newtonsoft.Json --version 13.0.3
-    #     dotnet add package Polly --version 7.1.1
-    #     dotnet add package System.ValueTuple --version 4.5.0
 
     - name: Install dependencies
       run: dotnet restore
 
     - name: Build unit test project
-      run: dotnet build tests/Mollie.Tests.Unit --configuration Release --no-restore
+      run: dotnet build --configuration Release
 
     - name: Run unit tests
       run: dotnet test tests/Mollie.Tests.Unit --no-restore --verbosity normal
