@@ -19,7 +19,9 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Setup NuGet Client
-      uses: NuGet/setup-nuget@v1.0.2
+      uses: NuGet/setup-nuget
+      with:
+        nuget-version: latest
 
     - name: Install dependencies
       run: dotnet restore
