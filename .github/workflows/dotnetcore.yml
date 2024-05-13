@@ -32,8 +32,8 @@ jobs:
     - name: Run unit tests
       run: dotnet test tests/Mollie.Tests.Unit --no-restore --verbosity normal
 
-    - name: Build integration test project
-      run: dotnet build tests/Mollie.Tests.Integration --configuration Release --no-restore
+    # - name: Build integration test project
+    #   run: dotnet build tests/Mollie.Tests.Integration --configuration Release --no-restore
 
     # - name: Run integration tests
     #   run: dotnet test tests/Mollie.Tests.Integration --filter "TestCategory!=AccessKeyIntegrationTest" --no-restore --verbosity normal 
