@@ -19,7 +19,7 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Setup NuGet Client
-      uses: NuGet/setup-nuget@v1.0.2
+      uses: nuget/setup-nuget@v2
       with:
         nuget-api-key: ${{ secrets.GITHUB_TOKEN }}
 
