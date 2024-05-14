@@ -19,19 +19,19 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Setup NuGet Client
-      uses: nuget/setup-nuget@v2
+      uses: nuget/setup-nuget@v1
 
-    - name:
-      run: dotnet nuget locals --clear all
+    - name: Clean
+      run: dotnet clean -property:Configuration=Release
 
-    - name: Install dependencies
-      run: dotnet restore
+    - name: Restore
+      run: nuget restore -property:Configuration=Release
 
     - name: Build Api
       run: dotnet msbuild -property:Configuration=Release -property:RestorePackagesConfig=true
 
     - name: Build unit test project
-      run: dotnet build tests\Mollie.Tests.Unit --configuration Release
+      run: dotnet build tests\Mollie.Tests.Unit
 
     - name: Run unit tests
       run: dotnet test tests\Mollie.Tests.Unit --no-restore --verbosity normal
