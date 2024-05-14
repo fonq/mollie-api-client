@@ -18,6 +18,11 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
+    - name: Setup NuGet Client
+      uses: NuGet/setup-nuget@v1.0.2
+      with:
+        nuget-api-key: ${{ secrets.GITHUB_TOKEN }}
+
     - name:
       run: dotnet nuget locals --clear all
 
