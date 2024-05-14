@@ -20,8 +20,6 @@ jobs:
 
     - name: Setup NuGet Client
       uses: nuget/setup-nuget@v2
-      with:
-        nuget-api-key: ${{ secrets.GITHUB_TOKEN }}
 
     - name:
       run: dotnet nuget locals --clear all
