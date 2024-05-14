@@ -25,7 +25,7 @@ jobs:
       run: dotnet clean -property:Configuration=Release
 
     - name: Restore
-      run: nuget restore -property:Configuration=Release
+      run: nuget restore src\Mollie.Api
 
     - name: Build Api
       run: dotnet msbuild -property:Configuration=Release -property:RestorePackagesConfig=true
