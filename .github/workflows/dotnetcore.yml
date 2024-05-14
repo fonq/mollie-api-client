@@ -28,7 +28,7 @@ jobs:
       run: dotnet restore
 
     - name: Build Api
-      run: dotnet msbuild -property:Configuration=Release
+      run: dotnet msbuild -property:Configuration=Release -property:RestorePackagesConfig=true
 
     - name: Build unit test project
       run: dotnet build tests\Mollie.Tests.Unit --configuration Release
