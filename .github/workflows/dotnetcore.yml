@@ -24,11 +24,14 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
+    - name: Build Api
+      run: dotnet msbuild src\Mollie.Api -property:Configuration=Release
+
     - name: Build unit test project
-      run: dotnet build --configuration Release
+      run: dotnet build tests\Mollie.Tests.Unit --configuration Release
 
     - name: Run unit tests
-      run: dotnet test tests/Mollie.Tests.Unit --no-restore --verbosity normal
+      run: dotnet test tests\Mollie.Tests.Unit --no-restore --verbosity normal
 
     # - name: Build integration test project
     #   run: dotnet build tests/Mollie.Tests.Integration --configuration Release --no-restore
