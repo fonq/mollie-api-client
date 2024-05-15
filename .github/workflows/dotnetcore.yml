@@ -28,7 +28,7 @@ jobs:
       run: nuget restore
 
     - name: Build Api
-      run: dotnet msbuild -property:Configuration=Release -property:RestorePackagesConfig=true
+      run: dotnet msbuild src\Mollie.Api -property:Configuration=Release
 
     - name: Install deps
       run: dotnet restore
