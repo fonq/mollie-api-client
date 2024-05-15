@@ -19,7 +19,7 @@ jobs:
         nuget-version: 'latest'
 
     - name: Install .net4.5 dependencies
-      run: nuget restore
+      run: nuget restore src\Mollie.Api\Mollie.Api.csproj -PackagesDirectory .\packages
 
     - name: Build .net4.5
       run: msbuild src\Mollie.Api\Mollie.Api.csproj -property:Configuration=Release
@@ -39,7 +39,7 @@ jobs:
       run: dotnet test tests\Mollie.Tests.Unit --no-restore --verbosity normal
 
     # - name: Build integration test project
-    #   run: dotnet build tests/Mollie.Tests.Integration --configuration Release --no-restore
+    #   run: dotnet build tests\Mollie.Tests.Integration --configuration Release --no-restore
 
     # - name: Run integration tests
     #   run: dotnet test tests/Mollie.Tests.Integration --filter "TestCategory!=AccessKeyIntegrationTest" --no-restore --verbosity normal 
