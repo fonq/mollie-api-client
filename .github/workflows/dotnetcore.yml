@@ -23,14 +23,11 @@ jobs:
       with:
         nuget-version: 'latest'
 
-    - name: Clean
-      run: dotnet clean -property:Configuration=Release
-
     - name: Install test dependencies
       run: dotnet restore
 
     - name: Install .net4.5 dependencies
-      run: nuget restore -MSBuildVersion 17
+      run: nuget restore
 
     - name: Build .net4.5
       run: dotnet msbuild src\Mollie.Api -property:Configuration=Release
