@@ -25,7 +25,7 @@ jobs:
       run: dotnet clean -property:Configuration=Release
 
     - name: Install .net4.5 dependencies
-      run: nuget restore
+      run: dotnet restore
 
     - name: Build .net4.5
       run: dotnet msbuild src\Mollie.Api -property:Configuration=Release
@@ -34,7 +34,7 @@ jobs:
       run: dotnet restore
 
     - name: Build test project
-      run: dotnet build tests\Mollie.Tests.Unit
+      run: dotnet build tests\Mollie.Tests.Unit --configuration Release
 
     - name: Run unit tests
       run: dotnet test tests\Mollie.Tests.Unit --no-restore --verbosity normal
