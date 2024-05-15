@@ -30,6 +30,9 @@ jobs:
     - name: Build Api
       run: dotnet msbuild -property:Configuration=Release -property:RestorePackagesConfig=true
 
+    - name: Install deps
+      run: dotnet restore
+
     - name: Build unit test project
       run: dotnet build tests\Mollie.Tests.Unit
 
