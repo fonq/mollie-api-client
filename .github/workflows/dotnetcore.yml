@@ -20,6 +20,8 @@ jobs:
 
     - name: Setup NuGet Client
       uses: nuget/setup-nuget@v2
+      with:
+        nuget-version: '17.x'
 
     - name: Clean
       run: dotnet clean -property:Configuration=Release
