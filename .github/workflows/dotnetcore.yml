@@ -24,11 +24,11 @@ jobs:
     - name: Clean
       run: dotnet clean -property:Configuration=Release
 
-    - name: Install .net4.5 dependencies
-      run: nuget restore
-
     - name: Install test dependencies
       run: dotnet restore
+
+    - name: Install .net4.5 dependencies
+      run: nuget restore
 
     - name: Build .net4.5
       run: dotnet msbuild src\Mollie.Api -property:Configuration=Release
