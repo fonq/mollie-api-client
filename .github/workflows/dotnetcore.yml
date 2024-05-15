@@ -28,7 +28,7 @@ jobs:
       run: nuget restore src\Mollie.Api\packages.config -SolutionDirectory ..\..\
 
     - name: Install test dependencies
-      run: dotnet restore tests\Mollie.Tests.Unit
+      run: dotnet restore
 
     - name: Build .net4.5
       run: dotnet msbuild src\Mollie.Api -property:Configuration=Release
