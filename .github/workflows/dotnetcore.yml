@@ -48,3 +48,20 @@ jobs:
     #     Mollie__AccessKey: ${{ secrets.Mollie__AccessKey }}
     #     Mollie__ClientId: ${{ secrets.Mollie__ClientId }}
     #     Mollie__ClientSecret: ${{ secrets.Mollie__ClientSecret }}
+
+    - name: Create release pkg
+      run: dotnet msbuild src\Mollie.Api -t:Build -p:Configuration=Release
+
+    - name: Adding Github as source to NuGet
+      run: dotnet nuget add source \
+        --username fonq \
+        --password ${{ secrets.GITHUB_TOKEN }} \
+        --store-password-in-clear-text \
+        --name github "https://nuget.pkg.github.com/fonq/index.json"
+
+    # - name: Publishing Packages
+    #   run: for f in /home/runner/work/fonQ.Messages/fonQ.Messages/packages/*.nupkg;
+    #        do
+    #          curl -vX PUT -u "fonq:${{ secrets.GITHUB_TOKEN }}" -F package=@$f https://nuget.pkg.github.com/fonq/;
+    #        done
+    #   shell: bash
