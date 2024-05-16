@@ -50,7 +50,7 @@ jobs:
     #     Mollie__ClientSecret: ${{ secrets.Mollie__ClientSecret }}
 
     - name: Create release pkg
-      run: nuget pack src\Mollie.Api\Mollie.Api.nuspec -Properties Configuration=Release
+      run: nuget pack src\Mollie.Api\Mollie.Api.csproj -Properties Configuration=Release
 
     - name: Adding Github as source to nuget
       run: dotnet nuget add source
@@ -60,4 +60,5 @@ jobs:
         --name github "https://nuget.pkg.github.com/fonq/index.json"
 
     - name: nuget PUSH!
-      run: @for %%f in ("C:\a\mollie-api-client\mollie-api-client\*.nupkg") do @dotnet nuget push @%%f --source "github"
+      run: for %f in (".\*.nupkg") do dotnet nuget push %f --source "github"
+      shell: cmd
