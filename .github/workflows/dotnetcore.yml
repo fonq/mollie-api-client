@@ -60,5 +60,4 @@ jobs:
         --name github "https://nuget.pkg.github.com/fonq/index.json"
 
     - name: nuget PUSH!
-      run: for %f in (".\*.nupkg") do dotnet nuget push %f --source "github"
-      shell: cmd
+      run: Get-ChildItem -Path ".\*.nupkg" | ForEach-Object { dotnet nuget push $_.Name --source "github" }
