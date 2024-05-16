@@ -52,6 +52,9 @@ jobs:
     - name: Create release pkg
       run: dotnet msbuild src\Mollie.Api -t:Build -p:Configuration=Release
 
+    - name: ehh..
+      run: choco install curl
+
     - name: Adding Github as source to NuGet
       run: dotnet nuget add source
         --username fonq
