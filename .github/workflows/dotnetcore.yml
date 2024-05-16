@@ -59,9 +59,8 @@ jobs:
         --store-password-in-clear-text
         --name github "https://nuget.pkg.github.com/fonq/index.json"
 
-    # - name: Publishing Packages
-    #   run: for f in /home/runner/work/fonQ.Messages/fonQ.Messages/packages/*.nupkg;
-    #        do
-    #          curl -vX PUT -u "fonq:${{ secrets.GITHUB_TOKEN }}" -F package=@$f https://nuget.pkg.github.com/fonq/;
-    #        done
-    #   shell: bash
+    - name: Publishing Packages
+      run: for %%f in ("D:\a\mollie-api-client\mollie-api-client\packages\*.nupkg") do (
+             curl -vX PUT -u "fonq:${{ secrets.GITHUB_TOKEN }}" -F package=@%%f https://nuget.pkg.github.com/fonq/;
+           )
+      shell: bat
