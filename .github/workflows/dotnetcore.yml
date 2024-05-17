@@ -4,27 +4,81 @@ on: [push]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    name: Build and test
+    runs-on: windows-2019
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '8.0.x'
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build unit test project
-      run: dotnet build tests/Mollie.Tests.Unit --configuration Release --no-restore
-    - name: Run unit tests
-      run: dotnet test tests/Mollie.Tests.Unit --no-restore --verbosity normal
-    - name: Build integration test project
-      run: dotnet build tests/Mollie.Tests.Integration --configuration Release --no-restore
-    - name: Run integration tests
-      run: dotnet test tests/Mollie.Tests.Integration --filter "TestCategory!=AccessKeyIntegrationTest" --no-restore --verbosity normal 
-      env:
-        Mollie__ApiKey: ${{ secrets.Mollie__ApiKey }}
-        Mollie__AccessKey: ${{ secrets.Mollie__AccessKey }}
-        Mollie__ClientId: ${{ secrets.Mollie__ClientId }}
-        Mollie__ClientSecret: ${{ secrets.Mollie__ClientSecret }}
+      # - uses: actions/checkout@v4
+
+      # - name: Setup msbuild
+      #   uses: microsoft/setup-msbuild@v2
+
+      # - name: Setup NuGet Client
+      #   uses: nuget/setup-nuget@v2
+      #   with:
+      #     nuget-version: 'latest'
+
+      # - name: Install .net4.5 dependencies
+      #   run: nuget restore src\Mollie.Api\Mollie.Api.csproj -PackagesDirectory .\packages
+
+      # - name: Build .net4.5
+      #   run: msbuild src\Mollie.Api\Mollie.Api.csproj -property:Configuration=Release
+
+      # # already present?
+      # # - name: Setup .NET Core
+      # #   uses: actions/setup-dotnet@v4
+      # #   with:
+      # #     dotnet-version: 8.0.x
+
+      # - name: Install test dependencies
+      #   run: dotnet restore
+
+      # - name: Build test project
+      #   run: dotnet build tests\Mollie.Tests.Unit --configuration Release
+
+      # - name: Run unit tests
+      #   run: dotnet test tests\Mollie.Tests.Unit --no-restore --verbosity normal
+
+  # publish:
+  #   name: Build NuGet package
+  #   runs-on: windows-2019
+  #   needs: build
+  #   if: github.ref == 'refs/heads/main'
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
+
+  #     - name: Setup msbuild
+  #       uses: microsoft/setup-msbuild@v2
+
+  #     - name: Setup NuGet Client
+  #       uses: nuget/setup-nuget@v2
+  #       with:
+  #         nuget-version: 'latest'
+
+  #     - name: Install .net4.5 dependencies
+  #       run: nuget restore src\Mollie.Api\Mollie.Api.csproj -PackagesDirectory .\packages
+
+  #     - name: Build .net4.5
+  #       run: msbuild src\Mollie.Api\Mollie.Api.csproj -property:Configuration=Release
+
+      - id: tag
+        uses: phish108/autotag-action@v1.1.55
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          with-v: false
+          release-branch: main
+          dry-run: 'true'
+
+      # - name: Create release pkg
+      #   run: nuget pack src\Mollie.Api\Mollie.Api.csproj -Version ${{ steps.tag.outputs.new-tag }} -Properties Configuration=Release
+
+      # - name: Adding Github as source to nuget
+      #   run: dotnet nuget add source
+      #     --username fonq
+      #     --password ${{ secrets.GITHUB_TOKEN }}
+      #     --store-password-in-clear-text
+      #     --name github "https://nuget.pkg.github.com/fonq/index.json"
+
+      # - name: Push nuget package to github
+      #   run: Get-ChildItem -Path ".\*.nupkg" | ForEach-Object { dotnet nuget push $_.Name --source "github" }

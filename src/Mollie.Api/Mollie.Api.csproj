@@ -1,39 +1,321 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="Pack" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <Version>3.6.0.0</Version>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Authors>Vincent Kok</Authors>
-    <Description>This is a wrapper for the Mollie REST webservice. All payment methods and webservice calls are supported.</Description>
-    <Company>Vincent Kok</Company>
-    <Product>Mollie Payment API</Product>
-    <PackageProjectUrl>https://github.com/Viincenttt/MollieApi</PackageProjectUrl>
-    <PackageTags>Mollie</PackageTags>
-    <AssemblyVersion>3.6.0.0</AssemblyVersion>
-    <FileVersion>3.6.0.0</FileVersion>
-    <PackageVersion>3.6.0.0</PackageVersion>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DBA9DC3A-D562-4D15-A7FB-B0A1DC3E517B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mollie.Api</RootNamespace>
+    <AssemblyName>Mollie.Api</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.28" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />    
+    <Compile Include="Client\Abstract\IBalanceClient.cs" />
+    <Compile Include="Client\Abstract\IBaseMollieClient.cs" />
+    <Compile Include="Client\Abstract\ICaptureClient.cs" />
+    <Compile Include="Client\Abstract\IChargebacksClient.cs" />
+    <Compile Include="Client\Abstract\IClientLinkClient.cs" />
+    <Compile Include="Client\Abstract\IConnectClient.cs" />
+    <Compile Include="Client\Abstract\ICustomerClient.cs" />
+    <Compile Include="Client\Abstract\IInvoicesClient.cs" />
+    <Compile Include="Client\Abstract\IMandateClient.cs" />
+    <Compile Include="Client\Abstract\IOnboardingClient.cs" />
+    <Compile Include="Client\Abstract\IOrderClient.cs" />
+    <Compile Include="Client\Abstract\IOrganizationsClient.cs" />
+    <Compile Include="Client\Abstract\IPaymentClient.cs" />
+    <Compile Include="Client\Abstract\IPaymentLinkClient.cs" />
+    <Compile Include="Client\Abstract\IPaymentMethodClient.cs" />
+    <Compile Include="Client\Abstract\IPermissionsClient.cs" />
+    <Compile Include="Client\Abstract\IProfileClient.cs" />
+    <Compile Include="Client\Abstract\IRefundClient.cs" />
+    <Compile Include="Client\Abstract\ISettlementsClient.cs" />
+    <Compile Include="Client\Abstract\IShipmentClient.cs" />
+    <Compile Include="Client\Abstract\ISubscriptionClient.cs" />
+    <Compile Include="Client\Abstract\ITerminalClient.cs" />
+    <Compile Include="Client\Abstract\IWalletClient.cs" />
+    <Compile Include="Client\BalanceClient.cs" />
+    <Compile Include="Client\BaseMollieClient.cs" />
+    <Compile Include="Client\CaptureClient.cs" />
+    <Compile Include="Client\ChargebacksClient.cs" />
+    <Compile Include="Client\ClientLinkClient.cs" />
+    <Compile Include="Client\ConnectClient.cs" />
+    <Compile Include="Client\CustomerClient.cs" />
+    <Compile Include="Client\InvoicesClient.cs" />
+    <Compile Include="Client\MandateClient.cs" />
+    <Compile Include="Client\MollieApiException.cs" />
+    <Compile Include="Client\OauthBaseMollieClient.cs" />
+    <Compile Include="Client\OnboardingClient.cs" />
+    <Compile Include="Client\OrderClient.cs" />
+    <Compile Include="Client\OrganizationsClient.cs" />
+    <Compile Include="Client\PaymentClient.cs" />
+    <Compile Include="Client\PaymentLinkClient.cs" />
+    <Compile Include="Client\PaymentMethodClient.cs" />
+    <Compile Include="Client\PermissionsClient.cs" />
+    <Compile Include="Client\ProfileClient.cs" />
+    <Compile Include="Client\RefundClient.cs" />
+    <Compile Include="Client\SettlementsClient.cs" />
+    <Compile Include="Client\ShipmentClient.cs" />
+    <Compile Include="Client\SubscriptionClient.cs" />
+    <Compile Include="Client\TerminalClient.cs" />
+    <Compile Include="Client\WalletClient.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\HttpClientExtensions.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Framework\Factories\BalanceReportResponseFactory.cs" />
+    <Compile Include="Framework\Factories\BalanceTransactionFactory.cs" />
+    <Compile Include="Framework\Factories\PaymentResponseFactory.cs" />
+    <Compile Include="Framework\JsonConverterService.cs" />
+    <Compile Include="JsonConverters\BalanceReportResponseJsonConverter.cs" />
+    <Compile Include="JsonConverters\BalanceTransactionJsonConverter.cs" />
+    <Compile Include="JsonConverters\Iso8601DateTimeConverter.cs" />
+    <Compile Include="JsonConverters\JsonCreationConverter.cs" />
+    <Compile Include="JsonConverters\ListResponseJsonConverter.cs" />
+    <Compile Include="JsonConverters\MicrosecondEpochConverter.cs" />
+    <Compile Include="JsonConverters\PaymentResponseConverter.cs" />
+    <Compile Include="JsonConverters\RawJsonConverter.cs" />
+    <Compile Include="JsonConverters\SettlementPeriodConverter.cs" />
+    <Compile Include="Models\AddressObject.cs" />
+    <Compile Include="Models\Amount.cs" />
+    <Compile Include="Models\ApplicationFee.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\BalanceReportAmount.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\BalanceReportAmountWithSubtotals.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\BalanceReportLinks.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\BalanceReportResponse.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\BalanceReportSubtotals.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\ReportGrouping.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\Specific\StatusBalance\StatusBalanceAvailableBalance.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\Specific\StatusBalance\StatusBalanceReportResponse.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\Specific\StatusBalance\StatusBalancesPendingBalance.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\Specific\StatusBalance\StatusBalancesTotal.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\Specific\TransactionCategories\TransactionCategoriesReportResponse.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\Specific\TransactionCategories\TransactionCategoriesSummaryBalances.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\Specific\TransactionCategories\TransactionCategoriesTotal.cs" />
+    <Compile Include="Models\Balance\Response\BalanceReport\Specific\TransactionCategories\TransactionCategoriesTransaction.cs" />
+    <Compile Include="Models\Balance\Response\BalanceResponse.cs" />
+    <Compile Include="Models\Balance\Response\BalanceResponseLinks.cs" />
+    <Compile Include="Models\Balance\Response\BalanceResponseStatus.cs" />
+    <Compile Include="Models\Balance\Response\BalanceTransaction\BalanceTransaction.cs" />
+    <Compile Include="Models\Balance\Response\BalanceTransaction\BalanceTransactionContextType.cs" />
+    <Compile Include="Models\Balance\Response\BalanceTransaction\BalanceTransactionResponse.cs" />
+    <Compile Include="Models\Balance\Response\BalanceTransaction\BalanceTransactionResponseLinks.cs" />
+    <Compile Include="Models\Balance\Response\BalanceTransaction\Specific\CaptureBalanceTransaction.cs" />
+    <Compile Include="Models\Balance\Response\BalanceTransaction\Specific\ChargebackBalanceTransaction.cs" />
+    <Compile Include="Models\Balance\Response\BalanceTransaction\Specific\InvoiceBalanceTransaction.cs" />
+    <Compile Include="Models\Balance\Response\BalanceTransaction\Specific\PaymentBalanceTransaction.cs" />
+    <Compile Include="Models\Balance\Response\BalanceTransaction\Specific\RefundBalanceTransaction.cs" />
+    <Compile Include="Models\Balance\Response\BalanceTransaction\Specific\SettlementBalanceTransaction.cs" />
+    <Compile Include="Models\Balance\Response\BalanceTransferDestination.cs" />
+    <Compile Include="Models\Capture\CaptureMode.cs" />
+    <Compile Include="Models\Capture\Request\CaptureRequest.cs" />
+    <Compile Include="Models\Capture\Response\CaptureResponse.cs" />
+    <Compile Include="Models\Capture\Response\CaptureResponseLinks.cs" />
+    <Compile Include="Models\Chargeback\ChargebackResponse.cs" />
+    <Compile Include="Models\Chargeback\ChargebackResponseLinks.cs" />
+    <Compile Include="Models\Chargeback\ChargebackResponseReason.cs" />
+    <Compile Include="Models\ClientLink\Request\ClientLinkOwner.cs" />
+    <Compile Include="Models\ClientLink\Request\ClientLinkRequest.cs" />
+    <Compile Include="Models\ClientLink\Response\ClientLinkResponse.cs" />
+    <Compile Include="Models\ClientLink\Response\ClientLinkResponseLinks.cs" />
+    <Compile Include="Models\CompanyEntityType.cs" />
+    <Compile Include="Models\CompanyObject.cs" />
+    <Compile Include="Models\Connect\AppPermissions.cs" />
+    <Compile Include="Models\Connect\RevokeTokenRequest.cs" />
+    <Compile Include="Models\Connect\TokenRequest.cs" />
+    <Compile Include="Models\Connect\TokenResponse.cs" />
+    <Compile Include="Models\Connect\TokenType.cs" />
+    <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\Customer\CustomerRequest.cs" />
+    <Compile Include="Models\Customer\CustomerResponse.cs" />
+    <Compile Include="Models\Customer\CustomerResponseLinks.cs" />
+    <Compile Include="Models\Error\MollieErrorMessage.cs" />
+    <Compile Include="Models\Invoice\InvoiceLine.cs" />
+    <Compile Include="Models\Invoice\InvoiceResponse.cs" />
+    <Compile Include="Models\Invoice\InvoiceResponseLinks.cs" />
+    <Compile Include="Models\Invoice\InvoiceStatus.cs" />
+    <Compile Include="Models\IResponseObject.cs" />
+    <Compile Include="Models\Issuer\IssuerResponse.cs" />
+    <Compile Include="Models\Issuer\IssuerResponseImage.cs" />
+    <Compile Include="Models\List\ListResponse.cs" />
+    <Compile Include="Models\List\ListResponseLinks.cs" />
+    <Compile Include="Models\Mandate\MandateRequest.cs" />
+    <Compile Include="Models\Mandate\MandateResponse.cs" />
+    <Compile Include="Models\Mandate\MandateResponseLinks.cs" />
+    <Compile Include="Models\Mandate\MandateStatus.cs" />
+    <Compile Include="Models\Mandate\PayPalMandateRequest.cs" />
+    <Compile Include="Models\Mandate\SepaDirectDebitMandateRequest.cs" />
+    <Compile Include="Models\Mode.cs" />
+    <Compile Include="Models\Onboarding\Request\OnboardingOrganizationRequest.cs" />
+    <Compile Include="Models\Onboarding\Request\OnboardingProfileRequest.cs" />
+    <Compile Include="Models\Onboarding\Request\SubmitOnboardingDataRequest.cs" />
+    <Compile Include="Models\Onboarding\Response\OnboardingStatus.cs" />
+    <Compile Include="Models\Onboarding\Response\OnboardingStatusResponse.cs" />
+    <Compile Include="Models\Onboarding\Response\OnboardingStatusResponseLinks.cs" />
+    <Compile Include="Models\Order\OrderAddressDetails.cs" />
+    <Compile Include="Models\Order\Request\ManageOrderLines\ManageOrderLinesAddOperation.cs" />
+    <Compile Include="Models\Order\Request\ManageOrderLines\ManageOrderLinesAddOperationData.cs" />
+    <Compile Include="Models\Order\Request\ManageOrderLines\ManageOrderLinesCancelOperation.cs" />
+    <Compile Include="Models\Order\Request\ManageOrderLines\ManageOrderLinesOperation.cs" />
+    <Compile Include="Models\Order\Request\ManageOrderLines\ManageOrderLinesRequest.cs" />
+    <Compile Include="Models\Order\Request\ManageOrderLines\ManageOrderLinesUpdateOperation.cs" />
+    <Compile Include="Models\Order\Request\ManageOrderLines\ManageOrderLinesUpdateOperationData.cs" />
+    <Compile Include="Models\Order\Request\ManageOrderLines\ManagerOrderLinesCancelOperationData.cs" />
+    <Compile Include="Models\Order\Request\ManageOrderLines\OrderLineOperation.cs" />
+    <Compile Include="Models\Order\Request\OrderLineCancellationRequest.cs" />
+    <Compile Include="Models\Order\Request\OrderLineDetails.cs" />
+    <Compile Include="Models\Order\Request\OrderLineDetailsCategory.cs" />
+    <Compile Include="Models\Order\Request\OrderLineDetailsType.cs" />
+    <Compile Include="Models\Order\Request\OrderLineRequest.cs" />
+    <Compile Include="Models\Order\Request\OrderLineUpdateRequest.cs" />
+    <Compile Include="Models\Order\Request\OrderPaymentRequest.cs" />
+    <Compile Include="Models\Order\Request\OrderRefundRequest.cs" />
+    <Compile Include="Models\Order\Request\OrderRequest.cs" />
+    <Compile Include="Models\Order\Request\OrderUpdateRequest.cs" />
+    <Compile Include="Models\Order\Request\PaymentSpecificParameters\ApplePaySpecificParameters.cs" />
+    <Compile Include="Models\Order\Request\PaymentSpecificParameters\BillieSpecificParameters.cs" />
+    <Compile Include="Models\Order\Request\PaymentSpecificParameters\CreditCardSpecificParameters.cs" />
+    <Compile Include="Models\Order\Request\PaymentSpecificParameters\GiftcardSpecificParameters.cs" />
+    <Compile Include="Models\Order\Request\PaymentSpecificParameters\IDealSpecificParameters.cs" />
+    <Compile Include="Models\Order\Request\PaymentSpecificParameters\KbcSpecificParameters.cs" />
+    <Compile Include="Models\Order\Request\PaymentSpecificParameters\KlarnaSpecificParameters.cs" />
+    <Compile Include="Models\Order\Request\PaymentSpecificParameters\PaymentSpecificParameters.cs" />
+    <Compile Include="Models\Order\Request\PaymentSpecificParameters\PaySafeCardSpecificParameters.cs" />
+    <Compile Include="Models\Order\Request\PaymentSpecificParameters\SepaDirectDebitSpecificParameters.cs" />
+    <Compile Include="Models\Order\Response\OrderEmbeddedResponse.cs" />
+    <Compile Include="Models\Order\Response\OrderLineResponse.cs" />
+    <Compile Include="Models\Order\Response\OrderLineResponseLinks.cs" />
+    <Compile Include="Models\Order\Response\OrderLineStatus.cs" />
+    <Compile Include="Models\Order\Response\OrderRefundResponse.cs" />
+    <Compile Include="Models\Order\Response\OrderResponse.cs" />
+    <Compile Include="Models\Order\Response\OrderResponseLinks.cs" />
+    <Compile Include="Models\Order\Response\OrderStatus.cs" />
+    <Compile Include="Models\Organization\OrganizationResponse.cs" />
+    <Compile Include="Models\Organization\OrganizationResponseLinks.cs" />
+    <Compile Include="Models\PaymentLink\Request\PaymentLinkRequest.cs" />
+    <Compile Include="Models\PaymentLink\Response\PaymentLinkResponse.cs" />
+    <Compile Include="Models\PaymentLink\Response\PaymentLinkResponseLinks.cs" />
+    <Compile Include="Models\PaymentMethod\PaymentMethodResponse.cs" />
+    <Compile Include="Models\PaymentMethod\PaymentMethodResponseImage.cs" />
+    <Compile Include="Models\PaymentMethod\PaymentMethodResponseLinks.cs" />
+    <Compile Include="Models\PaymentMethod\Pricing\FixedPricingResponse.cs" />
+    <Compile Include="Models\PaymentMethod\Pricing\PricingResponse.cs" />
+    <Compile Include="Models\Payment\Locale.cs" />
+    <Compile Include="Models\Payment\PaymentMethod.cs" />
+    <Compile Include="Models\Payment\PaymentStatus.cs" />
+    <Compile Include="Models\Payment\Request\ApplePayPaymentRequest.cs" />
+    <Compile Include="Models\Payment\Request\BankTransferPaymentRequest.cs" />
+    <Compile Include="Models\Payment\Request\CreditCardPaymentRequest.cs" />
+    <Compile Include="Models\Payment\Request\GiftcardPaymentRequest.cs" />
+    <Compile Include="Models\Payment\Request\IDealPaymentRequest.cs" />
+    <Compile Include="Models\Payment\Request\KbcIssuer.cs" />
+    <Compile Include="Models\Payment\Request\KbcPaymentRequest.cs" />
+    <Compile Include="Models\Payment\Request\PaymentRequest.cs" />
+    <Compile Include="Models\Payment\Request\PaymentRoutingRequest.cs" />
+    <Compile Include="Models\Payment\Request\PaymentUpdateRequest.cs" />
+    <Compile Include="Models\Payment\Request\PayPalPaymentRequest.cs" />
+    <Compile Include="Models\Payment\Request\PaySafeCardPaymentRequest.cs" />
+    <Compile Include="Models\Payment\Request\Przelewy24PaymentRequest.cs" />
+    <Compile Include="Models\Payment\Request\SepaDirectDebitRequest.cs" />
+    <Compile Include="Models\Payment\Resource.cs" />
+    <Compile Include="Models\Payment\Response\PaymentEmbeddedResponse.cs" />
+    <Compile Include="Models\Payment\Response\PaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\PaymentResponseLinks.cs" />
+    <Compile Include="Models\Payment\Response\PaymentRoutingResponse.cs" />
+    <Compile Include="Models\Payment\Response\QrCode.cs" />
+    <Compile Include="Models\Payment\Response\Specific\BancontactPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\BankTransferPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\BelfiusPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\CreditCardPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\EpsPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\GiftcardPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\GiropayPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\IdealPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\IngHomePayPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\KbcPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\PayPalPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\PaySafeCardPaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\PointOfSalePaymentResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\SepaDirectDebitResponse.cs" />
+    <Compile Include="Models\Payment\Response\Specific\SofortPaymentResponse.cs" />
+    <Compile Include="Models\Payment\RoutingDestination.cs" />
+    <Compile Include="Models\Payment\SequenceType.cs" />
+    <Compile Include="Models\Permission\PermissionResponse.cs" />
+    <Compile Include="Models\Permission\PermissionResponseLInks.cs" />
+    <Compile Include="Models\Profile\ProfileStatus.cs" />
+    <Compile Include="Models\Profile\Request\ProfileRequest.cs" />
+    <Compile Include="Models\Profile\Response\ApiKey.cs" />
+    <Compile Include="Models\Profile\Response\EnableGiftCardIssuerResponse.cs" />
+    <Compile Include="Models\Profile\Response\EnableGiftCardIssuerResponseLinks.cs" />
+    <Compile Include="Models\Profile\Response\EnableGiftCardIssuerStatus.cs" />
+    <Compile Include="Models\Profile\Response\ProfileResponse.cs" />
+    <Compile Include="Models\Profile\Response\ProfileResponseLinks.cs" />
+    <Compile Include="Models\Profile\ReviewStatus.cs" />
+    <Compile Include="Models\Refund\RefundRequest.cs" />
+    <Compile Include="Models\Refund\RefundResponse.cs" />
+    <Compile Include="Models\Refund\RefundResponseLinks.cs" />
+    <Compile Include="Models\Refund\RefundStatus.cs" />
+    <Compile Include="Models\Settlement\SettlementPeriod.cs" />
+    <Compile Include="Models\Settlement\SettlementPeriodCosts.cs" />
+    <Compile Include="Models\Settlement\SettlementPeriodCostsRate.cs" />
+    <Compile Include="Models\Settlement\SettlementPeriodRevenue.cs" />
+    <Compile Include="Models\Settlement\SettlementResponse.cs" />
+    <Compile Include="Models\Settlement\SettlementResponseLinks.cs" />
+    <Compile Include="Models\Settlement\SettlementStatus.cs" />
+    <Compile Include="Models\Shipment\Request\ShipmentLineRequest.cs" />
+    <Compile Include="Models\Shipment\Request\ShipmentRequest.cs" />
+    <Compile Include="Models\Shipment\Request\ShipmentUpdateRequest.cs" />
+    <Compile Include="Models\Shipment\Response\ShipmentResponse.cs" />
+    <Compile Include="Models\Shipment\Response\ShipmentResponseLinks.cs" />
+    <Compile Include="Models\Shipment\TrackingObject.cs" />
+    <Compile Include="Models\SortDirection.cs" />
+    <Compile Include="Models\Subscription\SubscriptionRequest.cs" />
+    <Compile Include="Models\Subscription\SubscriptionResponse.cs" />
+    <Compile Include="Models\Subscription\SubscriptionResponseLinks.cs" />
+    <Compile Include="Models\Subscription\SubscriptionStatus.cs" />
+    <Compile Include="Models\Subscription\SubscriptionUpdateRequest.cs" />
+    <Compile Include="Models\Terminal\TerminalResponse.cs" />
+    <Compile Include="Models\Terminal\TerminalResponseLinks.cs" />
+    <Compile Include="Models\TestmodeModel.cs" />
+    <Compile Include="Models\Url\UrlLink.cs" />
+    <Compile Include="Models\Url\UrlObjectLink.cs" />
+    <Compile Include="Models\Wallet\Request\ApplePayPaymentSessionRequest.cs" />
+    <Compile Include="Models\Wallet\Response\ApplePayPaymentSessionResponse.cs" />
+    <Compile Include="Options\MollieOptions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
   <ItemGroup>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
-    <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="packages.config" />
   </ItemGroup>
-
   <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>Mollie.Tests.Unit</_Parameter1>
-    </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>Mollie.Tests.Integration</_Parameter1>
-    </AssemblyAttribute>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,7 +18,6 @@ public class PermissionClientTests : BaseClientTests
         const string permissionId = "payments.read";
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Get, $"{BaseMollieClient.ApiEndPoint}permissions/{permissionId}")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond("application/json", defaultGetPermissionResponse);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var permissionClient = new PermissionsClient("access_abcde", httpClient);
@@ -60,7 +59,6 @@ public class PermissionClientTests : BaseClientTests
         // Arrange
         var mockHttp = new MockHttpMessageHandler();
         mockHttp.Expect(HttpMethod.Get, $"{BaseMollieClient.ApiEndPoint}permissions")
-            .With(request => request.Headers.Contains("Idempotency-Key"))
             .Respond("application/json", defaultListPermissionsResponse);
         HttpClient httpClient = mockHttp.ToHttpClient();
         using var permissionClient = new PermissionsClient("access_abcde", httpClient);

@@ -2,7 +2,7 @@
 using Mollie.Api.Models.Balance.Response.BalanceTransaction.Specific;
 
 namespace Mollie.Api.Framework.Factories {
-    internal class BalanceTransactionFactory {
+    public class BalanceTransactionFactory {
         public BalanceTransaction Create(string type) {
             switch (type) {
                 case BalanceTransactionContextType.Payment:
