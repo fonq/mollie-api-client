@@ -23,12 +23,6 @@ jobs:
       - name: Build .net4.5
         run: msbuild src\Mollie.Api\Mollie.Api.csproj -property:Configuration=Release
 
-      # already present?
-      # - name: Setup .NET Core
-      #   uses: actions/setup-dotnet@v4
-      #   with:
-      #     dotnet-version: 8.0.x
-
       - name: Install test dependencies
         run: dotnet restore
 
@@ -39,7 +33,7 @@ jobs:
         run: dotnet test tests\Mollie.Tests.Unit --no-restore --verbosity normal
 
   publish:
-    name: Build NuGet package
+    name: Build and release
     runs-on: windows-2019
     needs: build
     if: github.ref == 'refs/heads/main'
@@ -63,7 +57,7 @@ jobs:
         run: msbuild src\Mollie.Api\Mollie.Api.csproj -property:Configuration=Release
 
       - id: tag
-        uses: phish108/autotag-action@v1.1.55
+        uses: phish108/autotag-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           with-v: false
