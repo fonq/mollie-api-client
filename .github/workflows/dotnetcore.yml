@@ -70,6 +70,9 @@ jobs:
           release-branch: main
           dry-run: 'true'
 
+      - id: smt
+        run: echo ${{ steps.tag.outputs.new-tag }}
+
       # - name: Create release pkg
       #   run: nuget pack src\Mollie.Api\Mollie.Api.csproj -Version ${{ steps.tag.outputs.new-tag }} -Properties Configuration=Release
 
