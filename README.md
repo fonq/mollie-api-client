@@ -6,6 +6,12 @@
  * Changed basic sln to match v4.5
  * Removed the implemented retry policy because of the requirements for TargetFramework 4.6, and we *require* 4.5.
 
+## Installation
+ * Get your personal access token from GitHub.
+ * Add package repository: `https://nuget.pkg.github.com/fonq/index.json`.
+ * At username select the "Github Access Token" option.
+ * Paste your personal access token as password.
+
 ---
 
 # MollieApi
