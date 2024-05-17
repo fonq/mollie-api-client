@@ -3,50 +3,11 @@ name: Run automated tests
 on: [push]
 
 jobs:
-  build:
-    name: Build and test
-    runs-on: windows-2019
-    steps:
-      # - uses: actions/checkout@v4
-
-      # - name: Setup msbuild
-      #   uses: microsoft/setup-msbuild@v2
-
-      # - name: Setup NuGet Client
-      #   uses: nuget/setup-nuget@v2
-      #   with:
-      #     nuget-version: 'latest'
-
-      # - name: Install .net4.5 dependencies
-      #   run: nuget restore src\Mollie.Api\Mollie.Api.csproj -PackagesDirectory .\packages
-
-      # - name: Build .net4.5
-      #   run: msbuild src\Mollie.Api\Mollie.Api.csproj -property:Configuration=Release
-
-      # # already present?
-      # # - name: Setup .NET Core
-      # #   uses: actions/setup-dotnet@v4
-      # #   with:
-      # #     dotnet-version: 8.0.x
-
-      # - name: Install test dependencies
-      #   run: dotnet restore
-
-      # - name: Build test project
-      #   run: dotnet build tests\Mollie.Tests.Unit --configuration Release
-
-      # - name: Run unit tests
-      #   run: dotnet test tests\Mollie.Tests.Unit --no-restore --verbosity normal
-
-  # publish:
-  #   name: Build NuGet package
+  # build:
+  #   name: Build and test
   #   runs-on: windows-2019
-  #   needs: build
-  #   if: github.ref == 'refs/heads/main'
   #   steps:
   #     - uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 0
 
   #     - name: Setup msbuild
   #       uses: microsoft/setup-msbuild@v2
@@ -61,6 +22,45 @@ jobs:
 
   #     - name: Build .net4.5
   #       run: msbuild src\Mollie.Api\Mollie.Api.csproj -property:Configuration=Release
+
+  #     # already present?
+  #     # - name: Setup .NET Core
+  #     #   uses: actions/setup-dotnet@v4
+  #     #   with:
+  #     #     dotnet-version: 8.0.x
+
+  #     - name: Install test dependencies
+  #       run: dotnet restore
+
+  #     - name: Build test project
+  #       run: dotnet build tests\Mollie.Tests.Unit --configuration Release
+
+  #     - name: Run unit tests
+  #       run: dotnet test tests\Mollie.Tests.Unit --no-restore --verbosity normal
+
+  publish:
+    name: Build NuGet package
+    runs-on: windows-2019
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    steps:
+      # - uses: actions/checkout@v4
+      #   with:
+      #     fetch-depth: 0
+
+      # - name: Setup msbuild
+      #   uses: microsoft/setup-msbuild@v2
+
+      # - name: Setup NuGet Client
+      #   uses: nuget/setup-nuget@v2
+      #   with:
+      #     nuget-version: 'latest'
+
+      # - name: Install .net4.5 dependencies
+      #   run: nuget restore src\Mollie.Api\Mollie.Api.csproj -PackagesDirectory .\packages
+
+      # - name: Build .net4.5
+      #   run: msbuild src\Mollie.Api\Mollie.Api.csproj -property:Configuration=Release
 
       - id: tag
         uses: phish108/autotag-action@v1.1.55
