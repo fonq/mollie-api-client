@@ -57,7 +57,7 @@ jobs:
         run: msbuild src\Mollie.Api\Mollie.Api.csproj -property:Configuration=Release
 
       - id: tag
-        uses: phish108/autotag-action@v1
+        uses: phish108/autotag-action@v1.1.64
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           with-v: false
