@@ -41,7 +41,7 @@ jobs:
   publish:
     name: Build NuGet package
     runs-on: windows-2019
-    needs: build
+#    needs: build
     if: github.ref == 'refs/heads/main'
     steps:
       # - uses: actions/checkout@v4
